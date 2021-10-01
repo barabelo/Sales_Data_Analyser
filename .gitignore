@@ -27,3 +27,4 @@ hs_err_pid*
 Sales_Data_Analyser.iml
 
 target/
+target/classes/com/domain/sales_data_analyser/hello-view.fxml
