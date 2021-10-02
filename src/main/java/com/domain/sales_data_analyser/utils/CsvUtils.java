@@ -24,11 +24,9 @@ public class CsvUtils {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
             safeSalesList = csvToBean.parse();
+            return safeSalesList;
         } catch (IOException e) {
             throw new IOException("Houve um erro ao abrir o arquivo.");
         }
-
-        return safeSalesList;
-
     }
 }
