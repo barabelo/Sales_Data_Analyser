@@ -16,12 +16,18 @@ public class CsvUtils {
     public static List<Sale> readSalesCsv(Path csvPath) throws IOException {
         List<Sale> safeSalesList = Collections.synchronizedList(new ArrayList<>());
 
-        Reader reader = Files.newBufferedReader(csvPath);
-        CsvToBean<Sale> csvToBean = new CsvToBeanBuilder(reader)
-                .withType(Sale.class)
-                .withIgnoreLeadingWhiteSpace(true)
-                .build();
-        safeSalesList = csvToBean.parse();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(csvPath);
+            CsvToBean<Sale> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(Sale.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+            safeSalesList = csvToBean.parse();
+        } catch (IOException e) {
+            throw new IOException("Houve um erro ao abrir o arquivo.");
+        }
+
         return safeSalesList;
 
     }
