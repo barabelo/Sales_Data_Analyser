@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class CsvUtils {
-    public static List<Sale> readSalesCsv(Path csvPath) throws IOException {
-        List<Sale> safeSalesList;
+    public static ConcurrentLinkedDeque<Sale> readSalesCsv(Path csvPath) throws IOException {
+        ConcurrentLinkedDeque<Sale> safeSalesList;
 
         try {
             Reader reader = Files.newBufferedReader(csvPath);
@@ -22,10 +20,10 @@ public class CsvUtils {
                     .withType(Sale.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            safeSalesList = Collections.synchronizedList(csvToBean.parse());
+            safeSalesList = new ConcurrentLinkedDeque<Sale>(csvToBean.parse());
             return safeSalesList;
         } catch (IOException e) {
-            throw new IOException("Houve um erro ao abrir o arquivo.");
+            throw new IOException("An error occurred while opening the file.");
         }
     }
 }
