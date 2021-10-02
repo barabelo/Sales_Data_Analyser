@@ -14,16 +14,15 @@ import java.util.List;
 
 public class CsvUtils {
     public static List<Sale> readSalesCsv(Path csvPath) throws IOException {
-        List<Sale> safeSalesList = Collections.synchronizedList(new ArrayList<>());
+        List<Sale> safeSalesList;
 
-        Reader reader = null;
         try {
-            reader = Files.newBufferedReader(csvPath);
+            Reader reader = Files.newBufferedReader(csvPath);
             CsvToBean<Sale> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(Sale.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            safeSalesList = csvToBean.parse();
+            safeSalesList = Collections.synchronizedList(csvToBean.parse());
             return safeSalesList;
         } catch (IOException e) {
             throw new IOException("Houve um erro ao abrir o arquivo.");
