@@ -2,10 +2,8 @@ package com.domain.sales_data_analyser;
 
 import com.domain.sales_data_analyser.model.Sale;
 import com.domain.sales_data_analyser.model.SalesKeyTypes;
-import lombok.AllArgsConstructor;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-@AllArgsConstructor
 public class SearchWorker implements Runnable {
     private ConcurrentLinkedDeque<Sale> salesListChunk;
     private int start;
@@ -13,6 +11,19 @@ public class SearchWorker implements Runnable {
     private String key;
     private SalesKeyTypes salesKeyType;
     private ConcurrentLinkedDeque<Sale> result;
+
+    public SearchWorker(ConcurrentLinkedDeque<Sale> salesListChunk, int start, int end, String key, SalesKeyTypes salesKeyType) {
+        if (salesListChunk.equals(null) || start < 0 || end < 0 || end < start || key.equals(null) ||
+        salesKeyType.equals(null)) {
+            throw new IllegalArgumentException();
+        } else {
+            this.salesListChunk = salesListChunk;
+            this.start = start;
+            this.end = end;
+            this.key = key;
+            this.salesKeyType = salesKeyType;
+        }
+    }
 
     @Override
     public void run() {
