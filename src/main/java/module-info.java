@@ -1,7 +1,6 @@
 module com.domain.sales_data_analyser {
     requires javafx.controls;
     requires javafx.fxml;
-    requires lombok;
     requires com.opencsv;
 
 
