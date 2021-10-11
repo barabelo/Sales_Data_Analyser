@@ -3,15 +3,36 @@ package com.domain.sales_data_analyser.service;
 import com.domain.sales_data_analyser.SearchByRegionWorker;
 import com.domain.sales_data_analyser.model.Sale;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class ServiceKey {
-    public ConcurrentLinkedDeque<Sale> searchByRegion (ConcurrentLinkedDeque<Sale> salesList) {
+public class ServiceSales {
+    public ConcurrentLinkedDeque<Sale> searchByRegion(List<Sale> salesList, String key) {
         final int numWorkers = 10;
-        ConcurrentLinkedDeque<Sale> filteredList = new ConcurrentLinkedDeque<>();
-        Thread workers[] = new Thread[numWorkers];
-        for (int i = 0; i < workers.length; i += numWorkers) {
+
+        ConcurrentLinkedDeque<Sale> searchResult = new ConcurrentLinkedDeque<>();
+        Thread threads[] = new Thread[numWorkers];
+
+        int fromIndex = 0;
+        int salesPerWorker = (int) salesList.size() / numWorkers;
+        int toIndex = fromIndex + salesPerWorker + salesList.size() % numWorkers;
+
+        for (int i = 0; i < threads.length; i++) {
+            SearchByRegionWorker searchByRegionWorker
+                    = new SearchByRegionWorker(salesList.subList(fromIndex, toIndex), searchResult, key);
+            threads[i] = new Thread(searchByRegionWorker);
+            threads[i].start();
+            fromIndex = toIndex;
+            toIndex = fromIndex + salesPerWorker;
         }
-        return filteredList;
+
+        for (int i = 0; i < threads.length; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException();
+            }
+        }
+        return searchResult;
     }
 }

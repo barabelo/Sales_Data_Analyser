@@ -2,24 +2,25 @@ package com.domain.sales_data_analyser;
 
 import com.domain.sales_data_analyser.model.Sale;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class SearchByRegionWorker implements Runnable {
-    private ConcurrentLinkedDeque<Sale> salesListChunk;
-    private int start;
-    private int end;
+    private List<Sale> salesListChunk;
+    private ConcurrentLinkedDeque<Sale> searchResult;
     private String key;
-    private ConcurrentLinkedDeque<Sale> result;
 
-    public SearchByRegionWorker(ConcurrentLinkedDeque<Sale> salesListChunk, int start, int end, String key) {
+    public SearchByRegionWorker(List<Sale> salesListChunk, ConcurrentLinkedDeque<Sale> searchResult, String key) {
         this.salesListChunk = salesListChunk;
-        this.start = start;
-        this.end = end;
+        this.searchResult = searchResult;
         this.key = key;
     }
 
     @Override
     public void run() {
-        salesListChunk.forEach(sale -> {if (sale.getRegion().equals(key)) result.add(sale);});
+        for (Sale sale :
+                salesListChunk) {
+            if (sale.getRegion().equals(key)) searchResult.add(sale);
+        }
     }
 }

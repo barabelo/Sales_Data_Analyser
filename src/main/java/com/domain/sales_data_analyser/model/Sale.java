@@ -1,77 +1,52 @@
 package com.domain.sales_data_analyser.model;
 
+import com.opencsv.bean.CsvBindByName;
+import lombok.Getter;
+
 import java.util.Currency;
 import java.util.Date;
 
+@Getter
 public class Sale {
+    @CsvBindByName(column = "Region")
     public String region;
+
+    @CsvBindByName(column = "Country")
     public String country;
+
+    @CsvBindByName(column = "Item Type")
     public String itemType;
+
+    @CsvBindByName(column = "Sales Channel")
     public String salesChannel;
+
+    @CsvBindByName(column = "Order Priority")
     public char orderPriority;
+
+    @CsvBindByName(column = "Order Date")
     public Date orderDate;
+
+    @CsvBindByName(column = "Order ID")
     public int orderID;
+
+    @CsvBindByName(column = "Ship Date")
     public Date shipDate;
+
+    @CsvBindByName(column = "Units Sold")
     public int unitsSold;
+
+    @CsvBindByName(column = "Unit Price")
     public Currency unitPrice;
+
+    @CsvBindByName(column = "Unit Cost")
     public Currency unitCost;
+
+    @CsvBindByName(column = "Total Revenue")
     public Currency totalRevenue;
+
+    @CsvBindByName(column = "Total Cost")
     public Currency totalCost;
+
+    @CsvBindByName(column = "Total Profit")
     public Currency totalProfit;
-
-    public String getRegion() {
-        return region;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public String getSalesChannel() {
-        return salesChannel;
-    }
-
-    public char getOrderPriority() {
-        return orderPriority;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public Date getShipDate() {
-        return shipDate;
-    }
-
-    public int getUnitsSold() {
-        return unitsSold;
-    }
-
-    public Currency getUnitPrice() {
-        return unitPrice;
-    }
-
-    public Currency getUnitCost() {
-        return unitCost;
-    }
-
-    public Currency getTotalRevenue() {
-        return totalRevenue;
-    }
-
-    public Currency getTotalCost() {
-        return totalCost;
-    }
-
-    public Currency getTotalProfit() {
-        return totalProfit;
-    }
 }

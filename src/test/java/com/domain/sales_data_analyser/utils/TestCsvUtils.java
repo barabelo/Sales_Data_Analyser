@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.List;
 
 
 public class TestCsvUtils {
-    private static ConcurrentLinkedDeque<Sale> salesList;
+    private static List<Sale> salesList;
 
     @BeforeClass
     public static void initializeClass() throws URISyntaxException, IOException {
