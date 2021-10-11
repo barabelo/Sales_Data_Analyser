@@ -2,6 +2,7 @@ module com.domain.sales_data_analyser {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.opencsv;
+    requires lombok;
 
 
     opens com.domain.sales_data_analyser to javafx.fxml;
