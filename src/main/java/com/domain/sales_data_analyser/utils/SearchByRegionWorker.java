@@ -1,4 +1,4 @@
-package com.domain.sales_data_analyser;
+package com.domain.sales_data_analyser.utils;
 
 import com.domain.sales_data_analyser.model.Sale;
 
