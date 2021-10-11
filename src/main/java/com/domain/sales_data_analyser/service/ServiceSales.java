@@ -1,6 +1,6 @@
 package com.domain.sales_data_analyser.service;
 
-import com.domain.sales_data_analyser.SearchByRegionWorker;
+import com.domain.sales_data_analyser.model.SearchByRegionWorker;
 import com.domain.sales_data_analyser.model.Sale;
 
 import java.util.List;
