@@ -19,6 +19,26 @@ public class Sale {
     public Currency totalCost;
     public Currency totalProfit;
 
+    public Sale() {
+    }
+
+    public Sale(String region, String country, String itemType, String salesChannel, char orderPriority, LocalDate orderDate, int orderID, LocalDate shipDate, int unitsSold, Currency unitPrice, Currency unitCost, Currency totalRevenue, Currency totalCost, Currency totalProfit) {
+        this.region = region;
+        this.country = country;
+        this.itemType = itemType;
+        this.salesChannel = salesChannel;
+        this.orderPriority = orderPriority;
+        this.orderDate = orderDate;
+        this.orderID = orderID;
+        this.shipDate = shipDate;
+        this.unitsSold = unitsSold;
+        this.unitPrice = unitPrice;
+        this.unitCost = unitCost;
+        this.totalRevenue = totalRevenue;
+        this.totalCost = totalCost;
+        this.totalProfit = totalProfit;
+    }
+
     public String getRegion() {
         return region;
     }
