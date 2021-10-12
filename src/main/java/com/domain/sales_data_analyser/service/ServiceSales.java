@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class ServiceSales {
-    public ConcurrentLinkedDeque<Sale> searchByRegion(List<Sale> salesList, String key) {
+    public static ConcurrentLinkedDeque<Sale> searchByRegion(List<Sale> salesList, String key) {
         final int numWorkers = 10;
 
         ConcurrentLinkedDeque<Sale> searchResult = new ConcurrentLinkedDeque<>();
