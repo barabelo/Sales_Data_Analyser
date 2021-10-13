@@ -1,7 +1,7 @@
 package com.domain.sales_data_analyser.service;
 
-import com.domain.sales_data_analyser.utils.SearchByRegionWorker;
 import com.domain.sales_data_analyser.model.Sale;
+import com.domain.sales_data_analyser.utils.SearchByRegionWorker;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -11,10 +11,10 @@ public class ServiceSales {
         final int numWorkers = 10;
 
         ConcurrentLinkedDeque<Sale> searchResult = new ConcurrentLinkedDeque<>();
-        Thread threads[] = new Thread[numWorkers];
+        Thread[] threads = new Thread[numWorkers];
 
         int fromIndex = 0;
-        int salesPerWorker = (int) salesList.size() / numWorkers;
+        int salesPerWorker = salesList.size() / numWorkers;
         int toIndex = fromIndex + salesPerWorker + salesList.size() % numWorkers;
 
         for (int i = 0; i < threads.length; i++) {
