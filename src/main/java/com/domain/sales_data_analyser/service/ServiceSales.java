@@ -1,7 +1,7 @@
 package com.domain.sales_data_analyser.service;
 
 import com.domain.sales_data_analyser.model.Sale;
-import com.domain.sales_data_analyser.utils.SearchByRegionWorker;
+import com.domain.sales_data_analyser.threads.SearchByRegionWorker;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
