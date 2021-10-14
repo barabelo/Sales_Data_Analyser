@@ -10,4 +10,6 @@ module com.domain.sales_data_analyser {
     opens com.domain.sales_data_analyser.utils to javafx.fxml;
     exports com.domain.sales_data_analyser.model;
     opens com.domain.sales_data_analyser.model to javafx.fxml;
+    exports com.domain.sales_data_analyser.threads;
+    opens com.domain.sales_data_analyser.threads to javafx.fxml;
 }
