@@ -50,4 +50,17 @@ public class TestServiceSales {
         String emptyString = new String();
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, emptyString);
     }
+
+    @Test
+    public void testSearchByCountryAustralia() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(salesList, "Australia");
+        Assert.assertEquals(3, searchResults.size());
+    }
+
+    @Test
+    public void testSearchByCountryAtlantis() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(salesList, "Atlantis");
+        Assert.assertEquals(0, searchResults.size());
+    }
+
 }
