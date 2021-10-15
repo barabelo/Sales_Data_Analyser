@@ -53,7 +53,7 @@ public class TestServiceSales {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingEmptyKey() {
-        String emptyString = new String();
+        String emptyString = "";
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, emptyString);
     }
 
@@ -69,6 +69,18 @@ public class TestServiceSales {
         Assert.assertEquals(0, searchResults.size());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchByCountrySendingEmptySalesListAndEmptyKey() {
+        List<Sale> emptySalesList = new ArrayList<>();
+        String emptyString = "";
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(emptySalesList, emptyString);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchByCountrySendingNullSalesListAndNullKey() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(null, null);
+    }
+
     @Test
     public void testSearchByItemTypeSnacks() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(salesList, "Snacks");
@@ -79,6 +91,18 @@ public class TestServiceSales {
     public void testSearchByItemTypeThatIsNotOnTheSalesList() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(salesList, "Nails");
         Assert.assertEquals(0, searchResults.size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchByItemTypeSendingEmptySalesListAndEmptyKey() {
+        List<Sale> emptySalesList = new ArrayList<>();
+        String emptyString = "";
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(emptySalesList, emptyString);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchByItemTypeSendingNullSalesListAndNullKey() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(null, null);
     }
 
 }
