@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
@@ -36,5 +37,17 @@ public class TestServiceSales {
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingNullKey() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchByRegionSendingEmptySalesList() {
+        List<Sale> emptySalesList = new ArrayList<>();
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(emptySalesList, "Sub-Saharan Africa");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSearchByRegionSendingEmptyKey() {
+        String emptyString = new String();
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, emptyString);
     }
 }

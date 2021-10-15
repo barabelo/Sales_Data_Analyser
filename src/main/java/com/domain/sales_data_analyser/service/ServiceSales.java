@@ -24,9 +24,12 @@ public class ServiceSales {
     }
 
     public static ConcurrentLinkedDeque<Sale> searchByRegion(List<Sale> salesList, String key) {
-        if (salesList == null && key == null) throw new IllegalArgumentException("salesList and key can't be null.");
-        if (salesList == null) throw new IllegalArgumentException("salesList can't be null.");
-        if (key == null) throw new IllegalArgumentException("key can't be null.");
+        if ((salesList == null || salesList.isEmpty()) && (key == null || key.isEmpty()))
+            throw new IllegalArgumentException("salesList and key must not be null or empty.");
+        if (salesList == null || salesList.isEmpty())
+            throw new IllegalArgumentException("salesList must not be null or empty.");
+        if (key == null || key.isEmpty())
+            throw new IllegalArgumentException("key must not be null or empty.");
 
         initialize(salesList.size());
         for (int i = 0; i < threads.length; i++) {
