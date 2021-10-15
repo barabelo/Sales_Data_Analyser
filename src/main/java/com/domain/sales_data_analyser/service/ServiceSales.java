@@ -2,6 +2,7 @@ package com.domain.sales_data_analyser.service;
 
 import com.domain.sales_data_analyser.model.Sale;
 import com.domain.sales_data_analyser.threads.SearchByCountryWorker;
+import com.domain.sales_data_analyser.threads.SearchByItemTypeWorker;
 import com.domain.sales_data_analyser.threads.SearchByRegionWorker;
 
 import java.util.List;
@@ -67,4 +68,22 @@ public class ServiceSales {
         return searchResult;
     }
 
+    public static ConcurrentLinkedDeque<Sale> searchByItemType(List<Sale> salesList, String key) {
+        initialize(salesList, key);
+        for (int i = 0; i < threads.length; i++) {
+            SearchByItemTypeWorker searchByItemTypeWorker
+                    = new SearchByItemTypeWorker(salesList.subList(fromIndex, toIndex), searchResult, key);
+            threads[i] = new Thread(searchByItemTypeWorker);
+            threads[i].start();
+            fromIndex = toIndex;
+            toIndex = fromIndex + salesPerWorker;
+        }
+        for (Thread thread : threads)
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException();
+            }
+        return searchResult;
+    }
 }

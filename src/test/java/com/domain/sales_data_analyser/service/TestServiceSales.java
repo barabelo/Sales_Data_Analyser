@@ -29,6 +29,12 @@ public class TestServiceSales {
         Assert.assertEquals(36, searchResults.size());
     }
 
+    @Test
+    public void testSearchByRegionThatIsNotOnTheSalesList() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, "Pluto");
+        Assert.assertEquals(0, searchResults.size());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingNullSalesList() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(null, "Sub-Saharan Africa");
@@ -58,8 +64,20 @@ public class TestServiceSales {
     }
 
     @Test
-    public void testSearchByCountryAtlantis() {
+    public void testSearchByCountryThatIsNotOnTheSalesList() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(salesList, "Atlantis");
+        Assert.assertEquals(0, searchResults.size());
+    }
+
+    @Test
+    public void testSearchByItemTypeSnacks() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(salesList, "Snacks");
+        Assert.assertEquals(3, searchResults.size());
+    }
+
+    @Test
+    public void testSearchByItemTypeThatIsNotOnTheSalesList() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(salesList, "Nails");
         Assert.assertEquals(0, searchResults.size());
     }
 
