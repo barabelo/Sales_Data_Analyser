@@ -6,7 +6,6 @@ import com.domain.sales_data_analyser.utils.CsvUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
@@ -19,14 +18,15 @@ public class Cli {
     public void start() {
         String input = "";
 
-        System.out.println("SALES DATA ANALYSER");
         while (!input.equals("0")) {
-            System.out.println("Type the path to the sales report or 0 to exit:");
+            System.out.println("SALES DATA ANALYSER\n" +
+                    "Type the path to the sales report or 0 to exit:");
             input = new Scanner(System.in).nextLine();
             if (!input.equals("0")) {
                 try {
-                    CsvUtils.readSalesCsv(Path.of(input));
+                    List<Sale> salesList = CsvUtils.readSalesCsv(Path.of(input));
                     System.out.println("Loaded.");
+                    searchMenu(salesList);
                 } catch (IOException e) {
                     System.out.println("An error has occurred. The informed path could be invalid.");
                 }
@@ -63,22 +63,24 @@ public class Cli {
     }
 
     private void searchByRegionMenu(List<Sale> saleList) {
-        ConcurrentLinkedDeque<Sale> searchResults;
+        String input = "";
 
-        System.out.println("Type the region name or 0 to cancel:");
-        String searchKey = new Scanner(System.in).nextLine();
-        if (!searchKey.equals("0")) {
-            searchResults = ServiceSales.searchByRegion(saleList, searchKey);
+        while (!input.equals("0")) {
+            System.out.println("Type the region name or 0 to cancel:");
+            input = new Scanner(System.in).nextLine();
+            if (!input.equals("0")) {
+                ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(saleList, input);
 
-            int amountOfResultsFound = searchResults.size();
-            if (amountOfResultsFound > 0) {
-                System.out.println(amountOfResultsFound + " matches found.");
-                saveResultsQuestion(searchResults);
+                int amountOfResultsFound = searchResults.size();
+                if (amountOfResultsFound > 0) {
+                    System.out.println(amountOfResultsFound + " matches found.");
+                    saveResultsQuestion(searchResults);
+                } else {
+                    System.out.println("No results found.");
+                }
             } else {
-                System.out.println("No results found.");
+                System.out.println("Canceled.");
             }
-        } else {
-            System.out.println("Canceled.");
         }
     }
 
@@ -91,33 +93,38 @@ public class Cli {
     }
 
     private void saveResultsQuestion(ConcurrentLinkedDeque<Sale> searchResults) {
-        System.out.println("Do you want to save the results? (y/n)");
-        Scanner sc = new Scanner(System.in);
-        String option = sc.nextLine().toLowerCase(Locale.ROOT);
+        String option = "";
 
-        switch (option) {
-            case "y":
-                saveResultsMenu(searchResults);
-                break;
-            case "n":
-                break;
-            default:
-                System.out.println("Invalid option.");
-                break;
+        while (!option.equals("y") && !option.equals("n")) {
+            System.out.println("Do you want to save the results? (y/n)");
+            option = new Scanner(System.in).nextLine().toLowerCase();
+            switch (option) {
+                case "y":
+                    saveResultsMenu(searchResults);
+                    break;
+                case "n":
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+                    break;
+            }
         }
     }
 
     private void saveResultsMenu(ConcurrentLinkedDeque<Sale> searchResults) {
         String input = "";
+        boolean saved = false;
 
-        while (!input.equals("0")) {
+        while (!input.equals("0") && !saved) {
             System.out.println("Type the path where you want to save the file including the file name or 0 to cancel:");
             input = new Scanner(System.in).nextLine();
             if (!input.equals("0")) try {
                 CsvUtils.writeSalesDequeToCsv(searchResults, Path.of(input));
                 System.out.println("Saved.");
+                saved = true;
             } catch (IOException e) {
-                System.out.println("An error has occurred. The informed path could be invalid.");
+                System.out.println("An error has occurred. The informed path could be invalid. Don't forget to write " +
+                        "the file name.");
             }
             else System.out.println("Canceled.");
         }
