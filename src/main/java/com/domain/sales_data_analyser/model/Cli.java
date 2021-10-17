@@ -32,7 +32,7 @@ public class Cli {
     }
 
     private void searchMenu(List<Sale> saleList) {
-        final String REGION = "1", COUNTRY = "2", ITEM_TYPE = "3", RETURN = "4";
+        final String REGION = "1", COUNTRY = "2", ITEM_TYPE = "3", RETURN = "0";
         String option = "";
         while (!option.equals("0")) {
             System.out.println("Search by:\n" +
