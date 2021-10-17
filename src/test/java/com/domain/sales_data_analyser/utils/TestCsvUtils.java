@@ -28,7 +28,7 @@ public class TestCsvUtils {
     }
 
     @Test
-    public void testNumberOfLines() throws IOException {
+    public void testNumberOfLines() {
         int numberOfLines = salesList.size();
         Assert.assertEquals(100, numberOfLines);
     }
@@ -53,7 +53,7 @@ public class TestCsvUtils {
 
     @Test
     public void testContainsSpecificSale() {
-        Assert.assertTrue(salesList.get(3).equals(specificSale));
+        Assert.assertEquals(salesList.get(3), specificSale);
     }
 
     @Test

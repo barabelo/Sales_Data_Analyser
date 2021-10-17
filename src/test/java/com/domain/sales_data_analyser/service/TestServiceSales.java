@@ -43,24 +43,24 @@ public class TestServiceSales {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingNullSalesList() {
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(null, "Sub-Saharan Africa");
+        ServiceSales.searchByRegion(null, "Sub-Saharan Africa");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingNullKey() {
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, null);
+        ServiceSales.searchByRegion(salesList, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingEmptySalesList() {
         List<Sale> emptySalesList = new ArrayList<>();
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(emptySalesList, "Sub-Saharan Africa");
+        ServiceSales.searchByRegion(emptySalesList, "Sub-Saharan Africa");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByRegionSendingEmptyKey() {
         String emptyString = "";
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, emptyString);
+        ServiceSales.searchByRegion(salesList, emptyString);
     }
 
     @Test
@@ -85,12 +85,12 @@ public class TestServiceSales {
     public void testSearchByCountrySendingEmptySalesListAndEmptyKey() {
         List<Sale> emptySalesList = new ArrayList<>();
         String emptyString = "";
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(emptySalesList, emptyString);
+        ServiceSales.searchByCountry(emptySalesList, emptyString);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByCountrySendingNullSalesListAndNullKey() {
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(null, null);
+        ServiceSales.searchByCountry(null, null);
     }
 
     @Test
@@ -115,12 +115,12 @@ public class TestServiceSales {
     public void testSearchByItemTypeSendingEmptySalesListAndEmptyKey() {
         List<Sale> emptySalesList = new ArrayList<>();
         String emptyString = "";
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(emptySalesList, emptyString);
+        ServiceSales.searchByItemType(emptySalesList, emptyString);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSearchByItemTypeSendingNullSalesListAndNullKey() {
-        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(null, null);
+        ServiceSales.searchByItemType(null, null);
     }
 
 }

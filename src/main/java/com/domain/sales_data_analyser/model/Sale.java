@@ -51,26 +51,6 @@ public class Sale {
     @CsvBindByName(column = "Total Profit")
     private BigDecimal totalProfit;
 
-    public Sale() {
-    }
-
-    public Sale(String region, String country, String itemType, String salesChannel, char orderPriority, LocalDate orderDate, int orderID, LocalDate shipDate, int unitsSold, BigDecimal unitPrice, BigDecimal unitCost, BigDecimal totalRevenue, BigDecimal totalCost, BigDecimal totalProfit) {
-        this.region = region;
-        this.country = country;
-        this.itemType = itemType;
-        this.salesChannel = salesChannel;
-        this.orderPriority = orderPriority;
-        this.orderDate = orderDate;
-        this.orderID = orderID;
-        this.shipDate = shipDate;
-        this.unitsSold = unitsSold;
-        this.unitPrice = unitPrice;
-        this.unitCost = unitCost;
-        this.totalRevenue = totalRevenue;
-        this.totalCost = totalCost;
-        this.totalProfit = totalProfit;
-    }
-
     public String getRegion() {
         return region;
     }
@@ -95,16 +75,8 @@ public class Sale {
         this.itemType = itemType;
     }
 
-    public String getSalesChannel() {
-        return salesChannel;
-    }
-
     public void setSalesChannel(String salesChannel) {
         this.salesChannel = salesChannel;
-    }
-
-    public char getOrderPriority() {
-        return orderPriority;
     }
 
     public void setOrderPriority(char orderPriority) {
@@ -119,64 +91,32 @@ public class Sale {
         this.orderDate = orderDate;
     }
 
-    public long getOrderID() {
-        return orderID;
-    }
-
     public void setOrderID(long orderID) {
         this.orderID = orderID;
-    }
-
-    public LocalDate getShipDate() {
-        return shipDate;
     }
 
     public void setShipDate(LocalDate shipDate) {
         this.shipDate = shipDate;
     }
 
-    public long getUnitsSold() {
-        return unitsSold;
-    }
-
     public void setUnitsSold(long unitsSold) {
         this.unitsSold = unitsSold;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
     }
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public BigDecimal getUnitCost() {
-        return unitCost;
-    }
-
     public void setUnitCost(BigDecimal unitCost) {
         this.unitCost = unitCost;
-    }
-
-    public BigDecimal getTotalRevenue() {
-        return totalRevenue;
     }
 
     public void setTotalRevenue(BigDecimal totalRevenue) {
         this.totalRevenue = totalRevenue;
     }
 
-    public BigDecimal getTotalCost() {
-        return totalCost;
-    }
-
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
-    }
-
-    public BigDecimal getTotalProfit() {
-        return totalProfit;
     }
 
     public void setTotalProfit(BigDecimal totalProfit) {

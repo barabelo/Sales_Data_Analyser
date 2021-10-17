@@ -11,10 +11,6 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Cli {
-    private final String REGION = "1";
-    private final String COUNTRY = "2";
-    private final String ITEM_TYPE = "3";
-    private final String RETURN = "0";
 
     public void start() {
         String input = "";
@@ -36,6 +32,7 @@ public class Cli {
     }
 
     private void searchMenu(List<Sale> saleList) {
+        final String REGION = "1", COUNTRY = "2", ITEM_TYPE = "3", RETURN = "4";
         String option = "";
         while (!option.equals("0")) {
             System.out.println("Search by:\n" +
@@ -44,6 +41,7 @@ public class Cli {
                     "3 - Item Type\n" +
                     "0 - Return");
             option = new Scanner(System.in).nextLine();
+
             switch (option) {
                 case REGION:
                     System.out.println();

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class SearchByCountryWorker implements Runnable {
-    private List<Sale> salesListChunk;
-    private ConcurrentLinkedDeque<Sale> searchResult;
-    private String key;
+    private final List<Sale> salesListChunk;
+    private final ConcurrentLinkedDeque<Sale> searchResult;
+    private final String key;
 
     public SearchByCountryWorker(List<Sale> salesListChunk, ConcurrentLinkedDeque<Sale> searchResult, String key) {
         this.salesListChunk = salesListChunk;
