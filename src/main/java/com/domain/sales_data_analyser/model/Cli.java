@@ -4,6 +4,7 @@ import com.domain.sales_data_analyser.service.ServiceSales;
 import com.domain.sales_data_analyser.utils.CsvUtils;
 
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
@@ -18,17 +19,17 @@ public class Cli {
     public void start() {
         String input = "";
 
+        System.out.println("SALES DATA ANALYSER\n");
         while (!input.equals("0")) {
-            System.out.println("SALES DATA ANALYSER\n" +
-                    "Type the path to the sales report or 0 to exit:");
+            System.out.println("LOAD CSV >> Type the path to the sales report or 0 to exit:");
             input = new Scanner(System.in).nextLine();
             if (!input.equals("0")) {
                 try {
                     List<Sale> salesList = CsvUtils.readSalesCsv(Path.of(input));
-                    System.out.println("Loaded.");
+                    System.out.println("Loaded.\n");
                     searchMenu(salesList);
-                } catch (IOException e) {
-                    System.out.println("An error has occurred. The informed path could be invalid.");
+                } catch (IOException | InvalidPathException e) {
+                    System.out.println("An error has occurred. The informed path could be invalid.\n");
                 }
             }
         }
@@ -45,18 +46,22 @@ public class Cli {
             option = new Scanner(System.in).nextLine();
             switch (option) {
                 case REGION:
+                    System.out.println();
                     searchByRegionMenu(saleList);
                     break;
                 case COUNTRY:
+                    System.out.println();
                     searchByCountryMenu(saleList);
                     break;
                 case ITEM_TYPE:
+                    System.out.println();
                     searchByItemTypeMenu(saleList);
                     break;
                 case RETURN:
+                    System.out.println();
                     break;
                 default:
-                    System.out.println("Invalid option.");
+                    System.out.println("Invalid option.\n");
                     break;
             }
         }
@@ -66,7 +71,7 @@ public class Cli {
         String input = "";
 
         while (!input.equals("0")) {
-            System.out.println("Type the region name or 0 to cancel:");
+            System.out.println("SEARCH BY REGION >> Type the region name or 0 to cancel:");
             input = new Scanner(System.in).nextLine();
             if (!input.equals("0")) {
                 ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(saleList, input);
@@ -76,20 +81,56 @@ public class Cli {
                     System.out.println(amountOfResultsFound + " matches found.");
                     saveResultsQuestion(searchResults);
                 } else {
-                    System.out.println("No results found.");
+                    System.out.println("No results found.\n");
                 }
             } else {
-                System.out.println("Canceled.");
+                System.out.println("Canceled.\n");
             }
         }
     }
 
     private void searchByCountryMenu(List<Sale> saleList) {
+        String input = "";
 
+        while (!input.equals("0")) {
+            System.out.println("SEARCH BY COUNTRY >> Type the country name or 0 to cancel:");
+            input = new Scanner(System.in).nextLine();
+            if (!input.equals("0")) {
+                ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(saleList, input);
+
+                int amountOfResultsFound = searchResults.size();
+                if (amountOfResultsFound > 0) {
+                    System.out.println(amountOfResultsFound + " matches found.");
+                    saveResultsQuestion(searchResults);
+                } else {
+                    System.out.println("No results found.\n");
+                }
+            } else {
+                System.out.println("Canceled.\n");
+            }
+        }
     }
 
     private void searchByItemTypeMenu(List<Sale> saleList) {
+        String input = "";
 
+        while (!input.equals("0")) {
+            System.out.println("SEARCH BY ITEM TYPE >> Type the item type or 0 to cancel:");
+            input = new Scanner(System.in).nextLine();
+            if (!input.equals("0")) {
+                ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(saleList, input);
+
+                int amountOfResultsFound = searchResults.size();
+                if (amountOfResultsFound > 0) {
+                    System.out.println(amountOfResultsFound + " matches found.");
+                    saveResultsQuestion(searchResults);
+                } else {
+                    System.out.println("No results found.\n");
+                }
+            } else {
+                System.out.println("Canceled.\n");
+            }
+        }
     }
 
     private void saveResultsQuestion(ConcurrentLinkedDeque<Sale> searchResults) {
@@ -100,12 +141,14 @@ public class Cli {
             option = new Scanner(System.in).nextLine().toLowerCase();
             switch (option) {
                 case "y":
+                    System.out.println();
                     saveResultsMenu(searchResults);
                     break;
                 case "n":
+                    System.out.println();
                     break;
                 default:
-                    System.out.println("Invalid option.");
+                    System.out.println("Invalid option.\n");
                     break;
             }
         }
@@ -116,17 +159,17 @@ public class Cli {
         boolean saved = false;
 
         while (!input.equals("0") && !saved) {
-            System.out.println("Type the path where you want to save the file including the file name or 0 to cancel:");
+            System.out.println("SAVE RESULTS -> Type the path where you want to save the file including the file name or 0 to cancel:");
             input = new Scanner(System.in).nextLine();
             if (!input.equals("0")) try {
                 CsvUtils.writeSalesDequeToCsv(searchResults, Path.of(input));
-                System.out.println("Saved.");
+                System.out.println("Saved.\n");
                 saved = true;
-            } catch (IOException e) {
+            } catch (IOException | InvalidPathException e) {
                 System.out.println("An error has occurred. The informed path could be invalid. Don't forget to write " +
-                        "the file name.");
+                        "the file name.\n");
             }
-            else System.out.println("Canceled.");
+            else System.out.println("Canceled.\n");
         }
     }
 }
