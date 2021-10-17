@@ -30,6 +30,12 @@ public class TestServiceSales {
     }
 
     @Test
+    public void testSearchByRegion_aFRica() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, "aFRica");
+        Assert.assertEquals(46, searchResults.size());
+    }
+
+    @Test
     public void testSearchByRegionThatIsNotOnTheSalesList() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByRegion(salesList, "Pluto");
         Assert.assertEquals(0, searchResults.size());
@@ -64,6 +70,12 @@ public class TestServiceSales {
     }
 
     @Test
+    public void testSearchByCountry_coNGO() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(salesList, "coNGO");
+        Assert.assertEquals(2, searchResults.size());
+    }
+
+    @Test
     public void testSearchByCountryThatIsNotOnTheSalesList() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByCountry(salesList, "Atlantis");
         Assert.assertEquals(0, searchResults.size());
@@ -85,6 +97,12 @@ public class TestServiceSales {
     public void testSearchByItemTypeSnacks() {
         ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(salesList, "Snacks");
         Assert.assertEquals(3, searchResults.size());
+    }
+
+    @Test
+    public void testSearchByItemType_FOod() {
+        ConcurrentLinkedDeque<Sale> searchResults = ServiceSales.searchByItemType(salesList, "FOod");
+        Assert.assertEquals(7, searchResults.size());
     }
 
     @Test

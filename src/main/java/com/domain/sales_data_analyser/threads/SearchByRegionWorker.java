@@ -20,7 +20,7 @@ public class SearchByRegionWorker implements Runnable {
     public void run() {
         for (Sale sale :
                 salesListChunk) {
-            if (sale.getRegion().contains(key)) searchResult.addFirst(sale);
+            if (sale.getRegion().toLowerCase().contains(key.toLowerCase())) searchResult.addFirst(sale);
         }
     }
 }

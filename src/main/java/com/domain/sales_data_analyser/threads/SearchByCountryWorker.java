@@ -20,7 +20,7 @@ public class SearchByCountryWorker implements Runnable {
     public void run() {
         for (Sale sale :
                 salesListChunk) {
-            if (sale.getCountry().contains(key)) searchResult.addFirst(sale);
+            if (sale.getCountry().toLowerCase().contains(key.toLowerCase())) searchResult.addFirst(sale);
         }
     }
 }

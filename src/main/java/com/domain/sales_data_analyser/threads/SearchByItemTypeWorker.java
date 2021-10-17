@@ -20,7 +20,7 @@ public class SearchByItemTypeWorker implements Runnable {
     public void run() {
         for (Sale sale :
                 salesListChunk) {
-            if (sale.getItemType().contains(key)) searchResult.addFirst(sale);
+            if (sale.getItemType().toLowerCase().contains(key.toLowerCase())) searchResult.addFirst(sale);
         }
     }
 }
