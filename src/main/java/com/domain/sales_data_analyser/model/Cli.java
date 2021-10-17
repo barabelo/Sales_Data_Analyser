@@ -157,7 +157,7 @@ public class Cli {
         boolean saved = false;
 
         while (!input.equals("0") && !saved) {
-            System.out.println("SAVE RESULTS -> Type the path where you want to save the file including the file name or 0 to cancel:");
+            System.out.println("SAVE RESULTS >> Type the path where you want to save the file including the file name or 0 to cancel:");
             input = new Scanner(System.in).nextLine();
             if (!input.equals("0")) try {
                 CsvUtils.writeSalesDequeToCsv(searchResults, Path.of(input));
