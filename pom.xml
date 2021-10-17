@@ -50,8 +50,8 @@
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
-                            <finalName>Sales_Data_Analyser</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
+                            <finalName>sales-data-analyser</finalName>
+                            <appendAssemblyId>true</appendAssemblyId>
                         </configuration>
                     </execution>
                 </executions>
