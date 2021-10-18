@@ -41,7 +41,7 @@ public class CsvUtils {
                     .build();
             beanToCsv.write(salesList.iterator());
         } catch (IOException e) {
-            throw new IOException("An error occurred while opening the file.");
+            throw new IOException("An error occurred while writing the file.");
         } catch (CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
             throw new RuntimeException();
         }
